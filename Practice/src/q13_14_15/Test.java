@@ -17,9 +17,14 @@ public class Test {
 		////////////////////////////////////////////////////////////////////////////////
 		String str = "Contents\r\n" + "1 Usage\r\n" + "2 Encoding\r\n" + "2.1 Character encodings\r\n"
 				+ "2.2 Control codes\r\n" + "3 See also";
-
+		
 		for (SortType type : SortType.values()) {
 			System.out.println(stringUtil.sort(str, 70, type));
+		}
+		
+		stringUtil.setSortCol(50);
+		for (SortType type : SortType.values()) {
+			System.out.println(stringUtil.sort(str, type));
 		}
 
 		////////////////////////////////////////////////////////////////////////////////

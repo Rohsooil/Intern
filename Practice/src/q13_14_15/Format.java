@@ -1,13 +1,8 @@
 package q13_14_15;
 
 public class Format {
-	private String sentence;
 
-	public Format(String sentence) {
-		this.sentence = sentence;
-	}
-
-	public String formatSentence(int col) {
+	public String formatSentence(String sentence, int col) {
 		String result = "";
 
 		// 기존 문자열 개행 제거 \r\n이 두번 연속 들어간 것을 공백으로 바꿔줌.

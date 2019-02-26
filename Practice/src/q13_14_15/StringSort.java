@@ -4,13 +4,9 @@ public class StringSort {
 	private String str;
 	private int col;
 
-	public StringSort(String str, int col) {
-		this.str = str;
-		this.col = col;
-	}
-
 	// 주어진 방향으로 정렬.
-	public String sort(SortType sortType) {
+	public String sort(String str, SortType sortType) {
+		this.setStr(str);
 		String result = wordSort(sortType.getSort(), sortType) + "\n";
 		String[] arr = str.split("\r\n");
 		for (String s : arr) {
@@ -18,6 +14,11 @@ public class StringSort {
 		}
 
 		return result;
+	}
+
+	public String sort(String str, SortType sortType, int col) {
+		this.setCol(col);
+		return this.sort(str, sortType);
 	}
 
 	// 칼럼 길이와 정렬 방향에 맞추어서 문자열 정렬.
