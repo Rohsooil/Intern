@@ -1,15 +1,16 @@
+
 package q13_14_15;
 
 public class Reverse {
 	public String reverseWord(String words) {
 		String[] list = words.split(" ");
 		String result = "";
-
-		// ´Ü¾î ´ÜÀ§·Î ¹®ÀÚ¿­ ¹è¿­ »ı¼º ¹× ±æÀÌ°ªÀ» ÀÌ¿ëÇØ¼­ ¿ª¼øÀ¸·Î Ãâ·Â.
+		
+		// ë‹¨ì–´ ë‹¨ìœ„ë¡œ ë¬¸ìì—´ ë°°ì—´ ìƒì„± ë° ê¸¸ì´ê°’ì„ ì´ìš©í•´ì„œ ì—­ìˆœìœ¼ë¡œ ì¶œë ¥.
 		for (int i = list.length - 1; i >= 0; i--) {
 			result = result + list[i] + " ";
 		}
-
+		
 		return result;
 	}
 }

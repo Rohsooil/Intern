@@ -4,7 +4,7 @@ public class StringSort {
 	private String str;
 	private int col;
 
-	// ÁÖ¾îÁø ¹æÇâÀ¸·Î Á¤·Ä.
+	// ì£¼ì–´ì§„ ë°©í–¥ìœ¼ë¡œ ì •ë ¬.
 	public String sort(String str, SortType sortType) {
 		this.setStr(str);
 		String result = wordSort(sortType.getSort(), sortType) + "\n";
@@ -21,7 +21,7 @@ public class StringSort {
 		return this.sort(str, sortType);
 	}
 
-	// Ä®·³ ±æÀÌ¿Í Á¤·Ä ¹æÇâ¿¡ ¸ÂÃß¾î¼­ ¹®ÀÚ¿­ Á¤·Ä.
+	// ì¹¼ëŸ¼ ê¸¸ì´ì™€ ì •ë ¬ ë°©í–¥ì— ë§ì¶”ì–´ì„œ ë¬¸ìì—´ ì •ë ¬.
 	private String wordSort(String sortString, SortType direction) {
 		int startOfString = setStart(sortString, direction);
 		String result = "";
@@ -35,7 +35,7 @@ public class StringSort {
 		return result;
 	}
 
-	// Á¤·Ä ¹æÇâ¿¡ µû¶ó ¹®ÀÚ¿­ÀÇ ½ÃÀÛ À§Ä¡¸¦ Á¤ÇÏ±â À§ÇÔ.
+	// ì •ë ¬ ë°©í–¥ì— ë”°ë¼ ë¬¸ìì—´ì˜ ì‹œì‘ ìœ„ì¹˜ë¥¼ ì •í•˜ê¸° ìœ„í•¨.
 	private int setStart(String sortString, SortType direction) {
 		int lengthOfString = sortString.length();
 		if (direction.equals(SortType.RIGHT)) {
@@ -47,7 +47,7 @@ public class StringSort {
 		}
 	}
 
-	// ÁÖ¾îÁø Ä®·³¼ö¸¦ °¡Á®¿À°í º¯°æÇÏ´Â °ÔÅÍ ¼¼ÅÍ ¸Ş¼Òµå
+	// ì£¼ì–´ì§„ ì¹¼ëŸ¼ìˆ˜ë¥¼ ê°€ì ¸ì˜¤ê³  ë³€ê²½í•˜ëŠ” ê²Œí„° ì„¸í„° ë©”ì†Œë“œ
 	public int getCol() {
 		return col;
 	}
@@ -56,7 +56,7 @@ public class StringSort {
 		this.col = col;
 	}
 
-	// ÁÖ¾îÁø ½ºÆ®¸µÀ» °¡Á®¿À°í º¯°æÇÑ´Â °ÔÅÍ ¼¼ÅÍ ¸Ş¼Òµå
+	// ì£¼ì–´ì§„ ìŠ¤íŠ¸ë§ì„ ê°€ì ¸ì˜¤ê³  ë³€ê²½í•œëŠ” ê²Œí„° ì„¸í„° ë©”ì†Œë“œ
 	public String getStr() {
 		return this.str;
 	}

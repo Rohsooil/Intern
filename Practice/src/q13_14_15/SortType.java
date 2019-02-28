@@ -1,7 +1,7 @@
 package q13_14_15;
 
 public enum SortType {
-	// ¿­°ÅÇü ÀÌ¿ë. »ó¼ö±×·ìÀ» ÅëÇØ Á¤·Ä¹æÇâ ¼³Á¤.
+	// ì—´ê±°í˜• ì´ìš©. ìƒìˆ˜ê·¸ë£¹ì„ í†µí•´ ì •ë ¬ë°©í–¥ ì„¤ì •.
 	LEFT("<--LEFT-->"), MIDDLE("<--MIDDLE-->"), RIGHT("<--RIGHT-->");
 	
 	private String sort;
