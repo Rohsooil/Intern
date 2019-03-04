@@ -24,14 +24,14 @@ public enum Month {
 
 	// 해당 년도 해당 월에 몇 일이 있는지 계산.
 	// static 메소드로 만들어서 객체화 하지 않고 사용가능.
-	public static int getDaysInMonth(Year year, int month) {
+	public static int getDaysInMonth(int year, int month) {
 		int days = 0;
 		for (Month m : Month.values()) {
 			if (m.getMonth() == month) {
 				days = m.getDays();
 			}
 		}
-		if (month == 2 && year.isLeapYear()) {
+		if (month == 2 && Year.isLeapYear(year)) {
 			days += 1;
 		}
 

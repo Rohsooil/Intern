@@ -1,32 +1,63 @@
 package q11;
 
 public class Calendar {
-	private Year year;
+	private int year;
 	private int month;
-	private final int DAY_IN_WEEK = 7;
-	private final int WEEK_IN_YEAR = 52;
-	private final int DAY_IN_YEAR = 365;
+	private int day;
 
 	public Calendar(String date) {
-		int year_num = Integer.parseInt(date.substring(0, date.indexOf("��")));
-		int month_num = Integer.parseInt(date.substring(date.indexOf(" ") + 1, date.indexOf("��")));
+		int year_num = Integer.parseInt(date.substring(0, date.indexOf("년")));
+		int month_num = Integer.parseInt(date.substring(date.indexOf(" ") + 1, date.indexOf("월")));
+		int day_num = Integer.parseInt(date.substring(date.lastIndexOf(" ") + 1, date.indexOf("일")));
 
-		this.year = new Year(year_num);
-		this.month = month_num;
+		setDate(year_num, month_num, day_num);
+	}
+
+	public Calendar(int year, int month, int day) {
+		setDate(year, month, day);
+	}
+
+	private void setDate(int year, int month, int day) {
+		this.year = year;
+		if (month > 12) {
+			this.month = 1;
+		} else {
+			this.month = month;
+		}
+		if (day > Month.getDaysInMonth(year, this.month)) {
+			this.day = 1;
+		} else {
+			this.day = day;
+		}
+	}
+
+	public Day getDay() {
+		int days = getDays(year, month);
+		days += this.day;
+		days = days % Day.DAY_IN_WEEK;
+
+		Day day = getDay(days);
+		day.setDate(this.day);
+		return day;
 	}
 
 	// 연도와 월을 다시 설정할 수 있도록 해주는 메소드.
 	public void setTime(String date) {
-		int year_num = Integer.parseInt(date.substring(0, date.indexOf("��")));
-		int month_num = Integer.parseInt(date.substring(date.indexOf(" ") + 1, date.indexOf("��")));
+		int year_num = Integer.parseInt(date.substring(0, date.indexOf("년")));
+		int month_num = Integer.parseInt(date.substring(date.indexOf(" ") + 1, date.indexOf("월")));
+		int day_num = Integer.parseInt(date.substring(date.lastIndexOf(" ") + 1, date.indexOf("일")));
 
-		this.year = new Year(year_num);
-		this.month = month_num;
+		setDate(year_num, month_num, day_num);
+	}
+
+	// 연도와 월을 다시 설정할 수 있도록 해주는 메소드.
+	public void setTime(int year, int month, int day) {
+		setDate(year, month, day);
 	}
 
 	// 해당 년도는 몇일로 되어있는지 계산.
 	public int getDaysInYear() {
-		return this.year.dayInYear();
+		return Year.dayInYear(this.year);
 	}
 
 	// 해당 년도 해당 월에 몇일이 있는지 계산.
@@ -36,10 +67,10 @@ public class Calendar {
 
 	// 해당 년도, 해당 월의 마지막 날 반환.
 	public Day getLastDayInMonth() {
-		int days = getDays(year.getYear(), month);
+		int days = getDays(year, month);
 		int daysInMonth = Month.getDaysInMonth(year, month);
 		days += daysInMonth;
-		days = days % DAY_IN_WEEK;
+		days = days % Day.DAY_IN_WEEK;
 
 		Day day = getDay(days);
 		day.setDate(daysInMonth);
@@ -49,9 +80,9 @@ public class Calendar {
 
 	// 해당 년도, 해당 월의 첫번째 날 반환.
 	public Day getFirstDayInMonth() {
-		int days = getDays(year.getYear(), month);
+		int days = getDays(year, month);
 		days += 1;
-		days = days % DAY_IN_WEEK;
+		days = days % Day.DAY_IN_WEEK;
 
 		Day day = getDay(days);
 		day.setDate(1);
@@ -71,21 +102,43 @@ public class Calendar {
 		return day;
 	}
 
+	public Month getMonth() {
+		Month month = null;
+		for (Month m : Month.values()) {
+			if (m.getMonth() == this.month) {
+				month = m;
+				break;
+			}
+		}
+		return month;
+	}
+
 	// 0001년 부터 해당 년도와 해당 월까지 몇일이 있나 계산을함. 요일을 구하기 위함.
 	private int getDays(int year, int month) {
-		int days = (year - 1) * DAY_IN_YEAR + (year / 4 - year / 100 + year / 400);
+		int days = (year - 1) * Year.DAY_IN_YEAR + (year / 4 - year / 100 + year / 400);
 
 		for (Month m : Month.values()) {
 			if (m.getMonth() >= month) {
 				break;
 			}
 			days += m.getDays();
-			if (m.equals(Month.FEB) && this.year.isLeapYear()) {
+			if (m.equals(Month.FEB) && Year.isLeapYear(year)) {
 				days += 1;
 			}
 		}
 
 		return days;
+	}
+
+	public String getWeek() {
+		String result = "";
+		for (Day d : Day.values()) {
+			result = result + d.name() + "\t";
+		}
+		result += "\n";
+
+		result += Week.getWeek(this.year, this.month, getDay());
+		return result;
 	}
 
 	// 입력받은 년도와 월을 이용해서 마지막 주를 반환.
@@ -94,21 +147,14 @@ public class Calendar {
 	public String getLastWeek() {
 		// 해당년도와 해당하는 월의 첫번째 날인 일요일부터
 		// 마지막 날짜까지 구함.
-		Day d = getLastDayInMonth();
-		Day[] days = Day.values();
-		int lastday = d.getDate();
-		lastday -= d.getDayNum();
-		String week = "";
-		for (int i = 0; i <= d.getDayNum(); i++) {
-			week = week + days[i].name() + " ";
+		String result = "";
+		for (Day d : Day.values()) {
+			result = result + d.name() + "\t";
 		}
-		week += "\n";
+		result += "\n";
 
-		for (int i = 0; i <= d.getDayNum(); i++) {
-			week = week + lastday + "  ";
-			lastday++;
-		}
-		return week;
+		result += Week.getWeek(this.year, this.month, getLastDayInMonth());
+		return result;
 	}
 
 	// 입력받은 년도와 월을 이용해서 첫번째 주를 반환.
@@ -117,29 +163,23 @@ public class Calendar {
 	public String getFirstWeek() {
 		// 해당년도와 해당하는 월의 첫번째 날짜부터
 		// 그 주의 마지막 날인 토요일까지 구함
-		Day d = getFirstDayInMonth();
-		Day[] days = Day.values();
-		int firstday = d.getDate();
-		String week = "";
-		for (int i = d.getDayNum(); i < days.length; i++) {
-			week = week + days[i].name() + " ";
+		String result = "";
+		for (Day d : Day.values()) {
+			result = result + d.name() + "\t";
 		}
-		week += "\n";
+		result += "\n";
 
-		for (int i = d.getDayNum(); i < days.length; i++) {
-			week = week + firstday + "   ";
-			firstday++;
-		}
-		return week;
+		result += Week.getWeek(this.year, this.month, getFirstDayInMonth());
+		return result;
 	}
 
 	// 해당 년도를 반환
 	public int getYear() {
-		return this.year.getYear();
+		return this.year;
 	}
 
 	// 1년은 52주하고 하루나 이틀이기때문에 52주로 보는게 맞음.
 	public int getWeeksInYear() {
-		return WEEK_IN_YEAR;
+		return Week.WEEK_IN_YEAR;
 	}
 }

@@ -8,6 +8,7 @@ public enum Day {
 
 	private int dayNum;
 	private int date;
+	static final int DAY_IN_WEEK = 7;
 
 	private Day(int dayNum, int date) {
 		this.dayNum = dayNum;
