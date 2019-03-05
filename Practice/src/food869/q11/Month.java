@@ -1,4 +1,4 @@
-package q11;
+package food869.q11;
 
 public enum Month {
 	// 월을 정해진 값이 있으므로 열거형으로 표현.

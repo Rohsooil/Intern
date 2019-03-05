@@ -13,8 +13,9 @@ public class Test {
 		System.out.println(cc.getWeeksInYear());
 		System.out.println(cc.getFirstWeek());
 		System.out.println(cc.getLastWeek());
-		System.out.println(cc.getDay());
+		System.out.println(cc.getDate());
 		System.out.println(cc.getWeek());
+		System.out.println(cc.getMonth());
 
 		System.out.println();
 

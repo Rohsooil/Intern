@@ -1,4 +1,4 @@
-package q11;
+package food869.q11;
 
 public class Week {
 	static final int WEEK_IN_YEAR = 52;
