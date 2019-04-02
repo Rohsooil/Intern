@@ -1,79 +1,39 @@
 package food869.q19;
 
+import java.util.HashMap;
+
 public class Table {
-	private String[] title;
-	private String[][] contents;
-	private int[] tabSize;
-	private String table = "";
+	private Person[] persons;
+	private HashMap<String, Integer> title_map;
 
 	public Table(String[] title, String[][] contents) {
-		setTitleContents(title, contents);
-	}
+		persons = new Person[contents.length];
+		title_map = new HashMap<>();
 
-	public void setTitleContents(String[] title, String[][] contents) {
-		this.title = title;
-		this.contents = contents;
-		this.tabSize = new int[title.length];
-		makeTable();
-	}
-
-	private void makeTable() {
-		setTabSize();
 		for (int i = 0; i < title.length; i++) {
-			int size = tabSize[i] - title[i].length();
-			table = table + title[i] + sizeTab(title[i], size) + "│";
+			title_map.put(title[i], i);
 		}
 
-		table += getRow();
-		for (int i = 0; i < contents.length; i++) {
-			for (int j = 0; j < contents[i].length; j++) {
-				int size = tabSize[j] - contents[i][j].length();
-				table = table + contents[i][j] + sizeTab(contents[i][j], size) + "│";
-
-			}
-			table += "\n";
+		for (int i = 0; i < persons.length; i++) {
+			persons[i] = new Person(title_map, contents[i]);
 		}
 
 	}
 
-	private String sizeTab(String str, int size) {
-		String result = "";
-		for (int i = 0; i < size; i++) {
-			result += " ";
+	public Person getPerson(int index) {
+		if (index >= persons.length) {
+			return null;
+		} else {
+			return persons[index];
 		}
-
-		return result;
-	}
-
-	private void setTabSize() {
-		for (int i = 0; i < title.length; i++) {
-			tabSize[i] = title[i].length();
-		}
-		for (int i = 0; i < contents.length; i++) {
-			for (int j = 0; j < contents[i].length; j++) {
-				if (contents[i][j].length() > tabSize[j]) {
-					tabSize[j] = contents[i][j].length();
-				}
-			}
-		}
-	}
-
-	private String getRow() {
-		int howLong = 0;
-		String row = "\n";
-		for (int i : tabSize) {
-			howLong += i;
-		}
-		for (int i = 0; i < howLong; i++) {
-			row += "─";
-		}
-		row += "\n";
-		return row;
 	}
 
 	@Override
 	public String toString() {
-		return this.table;
+		String table = "";
+		for (Person p : persons) {
+			table = table + p + "\n";
+		}
+		return table;
 	}
-
 }

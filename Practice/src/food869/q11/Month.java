@@ -37,10 +37,5 @@ public enum Month {
 
 		return days;
 	}
-	
-	@Override
-	public String toString() {
-		return this.month + ", " + this.name();
-	}
 
 }

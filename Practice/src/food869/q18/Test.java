@@ -7,7 +7,8 @@ public class Test {
 				+ " */ \r\n" + "First line.\r\n" + "\r\n" + "/* This is a comment that \r\n"
 				+ "continues across lines */ \r\n" + "Second Line.\r\n" + "// This is a one-line comment \r\n"
 				+ "Third Line.\r\n" + "\r\n" + "Fourth Line. // This is a one-line comment.";
-		Code code = new Code();
-		System.out.println(code.removeComment(codeWithComment));
+
+		CommentRemover commentRemover = new CommentRemover();
+		System.out.println(commentRemover.removeComment(codeWithComment));
 	}
 }

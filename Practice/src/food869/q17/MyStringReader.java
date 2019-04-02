@@ -23,15 +23,18 @@ public class MyStringReader extends BufferedReader {
 		String result = "";
 		result += combineSlashLine(line); // 라인 끝이 슬래시로 끝나는 경우는 다음라인과 붙인다.
 		while (hasNextLine()) { // 다음 라인이 있는 동안,
-			if (flag && nextHasTabSpaceFirst()) { // flag가 true이고, 다음 라인의 첫 번째 문장이 탭, 공백으로 되어있을때.
+			if (flag && isNextHasTabSpaceFirst()) { // flag가 true이고, 다음 라인의 첫 번째 문장이 탭, 공백으로 되어있을때.
 				String nextLine = super.readLine();
 				result = result + " " + removeTabSpace(nextLine); // 다음라인의 탭, 공백을 제거해서 붙인다.
 			} else {
 				break;
 			}
 		}
-
-		return result;
+		if (result.equals("null")) {
+			return null;
+		} else {
+			return result;
+		}
 	}
 
 	// 해당 라인에서 앞부분 공백을 지우기 위한 메소드.
@@ -55,6 +58,9 @@ public class MyStringReader extends BufferedReader {
 
 	// 문장의 마지막에 슬래시가 있는 지 확인하는 메소드.
 	private boolean hasSlashLast(String line) {
+		if (line == null) {
+			return false;
+		}
 		char[] lineToChar = line.toCharArray();
 		int lastIndex = lineToChar.length - 1;
 
@@ -80,7 +86,7 @@ public class MyStringReader extends BufferedReader {
 	}
 
 	// 다음 라인의 시작이 탭과 공백으로 되어있는지 확인.
-	private boolean nextHasTabSpaceFirst() throws IOException {
+	private boolean isNextHasTabSpaceFirst() throws IOException {
 		super.mark(READ_AHEAD_LIMIT);
 		String nextLine = super.readLine();
 		char[] lineToChar = nextLine.toCharArray();

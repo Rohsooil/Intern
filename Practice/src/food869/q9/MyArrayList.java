@@ -147,6 +147,7 @@ public class MyArrayList<Type> {
 	}
 
 	// MyArrayList에 해당 index에 있는 원소를 반환하는 메소드.
+	@SuppressWarnings("unchecked")
 	public Type get(int index) {
 		if (index > this.size || index < 0) {
 			return null;

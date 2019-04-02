@@ -1,6 +1,7 @@
 package food869.q3;
 
 public class Test {
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
 		Find find1 = new Find();

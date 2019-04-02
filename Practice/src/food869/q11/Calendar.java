@@ -31,8 +31,7 @@ public class Calendar {
 		}
 	}
 
-	// 입력받은 날의 요일, 날짜 반환
-	public Day getDate() {
+	public Day getDay() {
 		int days = getDays(year, month);
 		days += this.day;
 		days = days % Day.DAY_IN_WEEK;
@@ -103,7 +102,6 @@ public class Calendar {
 		return day;
 	}
 
-	// 입력받은 월에대해 반환
 	public Month getMonth() {
 		Month month = null;
 		for (Month m : Month.values()) {
@@ -132,9 +130,6 @@ public class Calendar {
 		return days;
 	}
 
-	// 입력받은 날짜가 있는 주를
-	// 요일 요일
-	// 날짜 날짜 형태로 반환.
 	public String getWeek() {
 		String result = "";
 		for (Day d : Day.values()) {
@@ -142,7 +137,7 @@ public class Calendar {
 		}
 		result += "\n";
 
-		result += Week.getWeek(this.year, this.month, getDate());
+		result += Week.getWeek(this.year, this.month, getDay());
 		return result;
 	}
 

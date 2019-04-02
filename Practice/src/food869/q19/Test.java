@@ -33,7 +33,12 @@ public class Test {
 
 				, { "Spatner", "John", "jpoet@objectville.net", "M", "1963-04-18", "Salesman", "Woodstock,NY",
 						"married", "poetry,screenwriting", "nothing" } };
-		Table table = new Table(title, contents);
-		System.out.println(table);
+		Table t = new Table(title, contents);
+		System.out.println(t);
+
+		System.out.println(t.getPerson((2)));
+
+		System.out.println(t.getPerson(3).getBirthDay());
+
 	}
 }

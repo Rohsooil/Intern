@@ -1,6 +1,5 @@
 package food869.q17;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -19,21 +18,17 @@ public class Test {
 		MyStringReader myStringReader = new MyStringReader(new StringReader(input1));
 		MyStringReader myStringReader2 = new MyStringReader(new StringReader(input2));
 
-		myStringReader.setContinationMode(false);
+		myStringReader.setContinationMode(true);
 		myStringReader2.setContinationMode(true);
 
 		try {
-			while (!(output1 = myStringReader.readLine()).equals("null")) {
+			while ((output1 = myStringReader.readLine()) != null) {
 				System.out.println(output1);
 			}
-//			System.out.println(myStringReader.readLine());
-//			System.out.println(myStringReader.readLine());
+
 			System.out.println();
-//			System.out.println(myStringReader2.readLine());
-//			System.out.println(myStringReader2.readLine());
-//			System.out.println(myStringReader2.readLine());
-//			System.out.println(myStringReader2.readLine());
-			while (!(output2 = myStringReader2.readLine()).equals("null")) {
+
+			while ((output2 = myStringReader2.readLine()) != null) {
 				System.out.println(output2);
 			}
 			myStringReader.close();
